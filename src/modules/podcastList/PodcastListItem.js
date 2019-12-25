@@ -1,5 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+
+import PodcastImage from 'components/PodcastImage'
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -7,21 +10,15 @@ const StyledDiv = styled.div`
   & a {
     display: block;
   }
-
-  & img {
-    width: 100%;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
 `
 
 function PodcastListItem({ podcast }) {
   return (
     <StyledDiv>
-      <a href="/podcast.listennotes_url">
-        <img src={podcast.image} alt={podcast.title} />
+      <Link to={`/podcasts/${podcast.id}`}>
+        <PodcastImage src={podcast.image} alt={podcast.title} />
         {podcast.title}
-      </a>
+      </Link>
     </StyledDiv>
   )
 }
