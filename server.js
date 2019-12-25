@@ -5,7 +5,7 @@ const app = express()
 
 dotenv.config()
 
-const endpoints = ['/search', '/typeahead', '/best_podcasts']
+const endpoints = ['/search', '/typeahead', '/best_podcasts', '/podcasts/:id']
 
 const http = axios.create({
   baseURL: 'https://listen-api.listennotes.com/api/v2',
@@ -22,7 +22,7 @@ endpoints.forEach(endpoint => {
 })
 
 function makeRequest(endpoint, query, { id }) {
-  if (id) endpoint.replace(':id', id)
+  if (id) endpoint = endpoint.replace(':id', id)
   return http.get(endpoint, {
     params: query,
   })
