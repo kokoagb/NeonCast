@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Loader } from 'react-feather'
 
 const StyledDiv = styled.div`
+  grid-area: player;
   position: fixed;
   bottom: 0;
   left: 0;

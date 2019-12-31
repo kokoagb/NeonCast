@@ -1,8 +1,13 @@
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBestPodcasts } from 'modules/podcastList/podcastListSlice'
 import PodcastList from './PodcastList'
 import PodcastListPagination from './PodcastListPagination'
+
+const StyledMain = styled.main`
+  grid-area: main;
+`
 
 function PodcastListPage() {
   const dispatch = useDispatch()
@@ -14,11 +19,11 @@ function PodcastListPage() {
   }, [page_number])
 
   return (
-    <div className="podcast-list">
+    <StyledMain className="podcast-list">
       <h1>{name}</h1>
       <PodcastList podcasts={podcasts} />
       <PodcastListPagination />
-    </div>
+    </StyledMain>
   )
 }
 

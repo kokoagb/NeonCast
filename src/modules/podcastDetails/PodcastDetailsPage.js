@@ -6,8 +6,9 @@ import { fetchPodcast } from './podcastDetailsSlice'
 import PodcastExcerpt from './PodcastExcerpt'
 import EpisodeList from './EpisodeList'
 
-const StyledDiv = styled.div`
+const StyledMain = styled.main`
   display: grid;
+  grid-area: main;
   grid-template-columns: 300px 1fr;
 
   & .grid-right {
@@ -32,7 +33,7 @@ function PodcastDetailPage() {
   if (isLoading || !podcast) return <div>Loading...</div>
 
   return (
-    <StyledDiv>
+    <StyledMain>
       <div>
         <PodcastExcerpt podcast={podcast} />
       </div>
@@ -41,7 +42,7 @@ function PodcastDetailPage() {
 
         <EpisodeList episodes={podcast.episodes} />
       </div>
-    </StyledDiv>
+    </StyledMain>
   )
 }
 

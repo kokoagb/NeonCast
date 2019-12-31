@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useLocation, Link } from 'react-router-dom'
-import Logo from './Logo'
+
+const StyledDiv = styled.div`
+  grid-area: sidebar;
+`
 
 const StyledUl = styled.ul`
   list-style-type: none;
@@ -25,10 +28,9 @@ function Sidebar() {
   ))
 
   return (
-    <div>
-      <Logo />
+    <StyledDiv>
       <StyledUl>{renderedMenuItems}</StyledUl>
-    </div>
+    </StyledDiv>
   )
 }
 

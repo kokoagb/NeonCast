@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Layout from 'components/Layout'
+import Header from 'modules/header/Header'
 import Sidebar from 'modules/sideBar/SideBar'
 import PodcastListPage from 'modules/podcastList/PodcastListPage'
 import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
@@ -12,13 +13,11 @@ function App() {
   return (
     <Router>
       <Layout>
+        <Header />
         <Sidebar />
         <Switch>
           <Route path="/podcasts/:id">
             <PodcastDetailPage />
-          </Route>
-          <Route path="/test">
-            <div>TEST</div>
           </Route>
           <Route path="/">
             <PodcastListPage />
