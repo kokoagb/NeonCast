@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPodcast } from './podcastDetailsSlice'
-
-import PodcastImage from 'components/PodcastImage'
 import PodcastExcerpt from './PodcastExcerpt'
 import EpisodeList from './EpisodeList'
 
@@ -14,7 +12,7 @@ const StyledDiv = styled.div`
 
   & .grid-right {
     text-align: justify;
-    padding-left: 1rem;
+    padding: 0 1rem;
   }
 `
 
