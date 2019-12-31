@@ -4,27 +4,29 @@ import Layout from 'components/Layout'
 import Sidebar from 'modules/sideBar/SideBar'
 import PodcastListPage from 'modules/podcastList/PodcastListPage'
 import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
+import Player from 'modules/player/Player'
+
+import './App.css'
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Layout>
-          <Sidebar />
-          <Switch>
-            <Route path="/podcasts/:id">
-              <PodcastDetailPage />
-            </Route>
-            <Route path="/test">
-              <div>TEST</div>
-            </Route>
-            <Route path="/">
-              <PodcastListPage />
-            </Route>
-          </Switch>
-        </Layout>
-      </Router>
-    </div>
+    <Router>
+      <Layout>
+        <Sidebar />
+        <Switch>
+          <Route path="/podcasts/:id">
+            <PodcastDetailPage />
+          </Route>
+          <Route path="/test">
+            <div>TEST</div>
+          </Route>
+          <Route path="/">
+            <PodcastListPage />
+          </Route>
+        </Switch>
+        <Player />
+      </Layout>
+    </Router>
   )
 }
 
