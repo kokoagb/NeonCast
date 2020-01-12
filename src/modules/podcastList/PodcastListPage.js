@@ -7,6 +7,8 @@ import PodcastListPagination from './PodcastListPagination'
 
 const StyledMain = styled.main`
   grid-area: main;
+  overflow-y: auto;
+  padding: 0 1rem;
 `
 
 function PodcastListPage() {

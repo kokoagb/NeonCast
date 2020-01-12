@@ -9,11 +9,13 @@ import EpisodeList from './EpisodeList'
 const StyledMain = styled.main`
   display: grid;
   grid-area: main;
+  overflow-y: hidden;
   grid-template-columns: 300px 1fr;
 
   & .grid-right {
     text-align: justify;
     padding: 0 1rem;
+    overflow-y: auto;
   }
 `
 
