@@ -14,10 +14,8 @@ const searchResults = createSlice({
       state.isLoading = true
     },
     getSearchResultsSuccess(state, { payload }) {
-      const { podcasts, episodes } = payload
       state.isLoading = false
-      state.podcasts = podcasts
-      state.episodes = episodes
+      state.podcasts = payload
       state.error = null
     },
     getSearchResultsFailure(state, { payload }) {
@@ -36,12 +34,8 @@ export const {
 export const fetchSearchResults = query => async dispatch => {
   try {
     dispatch(getSearchResultsStart())
-    const responses = await Promise.all([
-      searchPodcasts(query, 'podcast'),
-      searchPodcasts(query, 'episode'),
-    ])
-    const [podcasts, episodes] = responses.map(r => r.results)
-    dispatch(getSearchResultsSuccess({ podcasts, episodes }))
+    const response = await searchPodcasts(query, 'podcast')
+    dispatch(getSearchResultsSuccess(response.results))
   } catch (e) {
     dispatch(getSearchResultsFailure(e))
   }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Search } from 'react-feather'
@@ -45,7 +45,10 @@ const StyledForm = styled.form`
 
 function SearchBox() {
   const [query, setQuery] = useState('')
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const dispatch = useDispatch()
+
+  const formRef = useRef(null)
 
   const runSearch = useRef(
     debounce(query => {
@@ -59,16 +62,31 @@ function SearchBox() {
     if (val.length > 3) runSearch(val)
   }
 
+  useEffect(() => {
+    const clickHandler = e => {
+      console.log('foobar')
+      const isFormClick = formRef.current.contains(e.target)
+      if (isFormClick && !isDropdownVisible) setIsDropdownVisible(true)
+      if (!isFormClick && isDropdownVisible) setIsDropdownVisible(false)
+    }
+
+    document.addEventListener('click', clickHandler)
+
+    return () => {
+      document.removeEventListener('click', clickHandler)
+    }
+  }, [isDropdownVisible])
+
   return (
-    <StyledForm>
+    <StyledForm ref={formRef}>
       <Search />
       <input
         type="text"
-        placeholder="Search podcasts or episodes..."
+        placeholder="Search podcasts..."
         onChange={handleChange}
         value={query}
       />
-      <SearchResults />
+      <SearchResults isDropdownVisible={isDropdownVisible} />
       <button>search</button>
     </StyledForm>
   )

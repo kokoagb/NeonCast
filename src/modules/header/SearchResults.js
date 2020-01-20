@@ -21,11 +21,12 @@ const StyledDiv = styled.div`
   }
 `
 
-function SearchResults() {
-  const { isLoading, error, podcasts, episodes } = useSelector(
+function SearchResults({ isDropdownVisible }) {
+  const { isLoading, error, podcasts } = useSelector(
     state => state.searchResults,
   )
-  if (isLoading || (!podcasts.length && !episodes.length)) return null
+
+  if (isLoading || !podcasts.length || !isDropdownVisible) return null
   if (error) return <div>Error</div>
 
   return (
@@ -34,13 +35,6 @@ function SearchResults() {
         {podcasts.map(podcast => (
           <li key={podcast.id}>
             <Link to={`/podcasts/${podcast.id}`}>{podcast.title_original}</Link>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {episodes.slice(3).map(episode => (
-          <li key={episode.id}>
-            <Link to={'#'}>{episode.title_original}</Link>
           </li>
         ))}
       </ul>
