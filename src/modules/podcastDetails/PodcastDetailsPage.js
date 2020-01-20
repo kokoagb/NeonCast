@@ -10,6 +10,7 @@ const StyledMain = styled.main`
   display: grid;
   grid-area: main;
   overflow-y: hidden;
+  padding-left: 1rem;
   grid-template-columns: 300px 1fr;
 
   & .grid-right {
@@ -28,7 +29,7 @@ function PodcastDetailPage() {
 
   useEffect(() => {
     dispatch(fetchPodcast(id))
-  }, [id])
+  }, [id, dispatch])
 
   if (error) return <div>An error occurred</div>
 
@@ -41,7 +42,6 @@ function PodcastDetailPage() {
       </div>
       <div className="grid-right">
         <div className="podcast-description">{podcast.description}</div>
-
         <EpisodeList episodes={podcast.episodes} />
       </div>
     </StyledMain>

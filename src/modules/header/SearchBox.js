@@ -23,7 +23,7 @@ const StyledForm = styled.form`
     font-size: 1rem;
     border-radius: 1.5rem;
     padding: 0.5rem 0.5rem 0.5rem 2.5rem;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
     font-family: Oswald, sans-serif;
     outline: none;
   }
