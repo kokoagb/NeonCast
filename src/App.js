@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Layout from 'components/Layout'
 import Header from 'modules/header/Header'
 import Sidebar from 'modules/sideBar/SideBar'
-import PodcastListPage from 'modules/podcastList/PodcastListPage'
+import TrendingPage from 'modules/podcastList/TrendingPage'
 import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
 import Player from 'modules/player/Player'
 
@@ -20,7 +20,7 @@ function App() {
             <PodcastDetailPage />
           </Route>
           <Route path="/">
-            <PodcastListPage />
+            <TrendingPage />
           </Route>
         </Switch>
         <Player />
