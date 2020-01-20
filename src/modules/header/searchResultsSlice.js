@@ -34,7 +34,7 @@ export const {
 export const fetchSearchResults = query => async dispatch => {
   try {
     dispatch(getSearchResultsStart())
-    const response = await searchPodcasts(query, 'podcast')
+    const response = await searchPodcasts(query)
     dispatch(getSearchResultsSuccess(response.results))
   } catch (e) {
     dispatch(getSearchResultsFailure(e))

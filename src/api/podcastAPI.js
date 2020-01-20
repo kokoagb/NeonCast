@@ -2,9 +2,16 @@ import axios from 'axios'
 
 const http = axios.create()
 
-export async function searchPodcasts(q, type) {
+export async function searchPodcasts(q) {
   const { data } = await http.get('/api/search', {
-    params: { q, type },
+    params: { q, type: 'podcast' },
+  })
+  return data
+}
+
+export async function searchEpisodes(q) {
+  const { data } = await http.get('/api/search', {
+    params: { q, type: 'episode' },
   })
   return data
 }
