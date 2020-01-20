@@ -20,16 +20,16 @@ const podcastList = createSlice({
     },
     getPodcastsSuccess(state, { payload }) {
       const {
-        name,
         total,
         page_number,
         next_page_number,
         previous_page_number,
+        collectionTitle,
         podcasts,
       } = payload
       state.isLoading = false
-      state.name = name
       state.podcasts = podcasts
+      state.collectionTitle = collectionTitle
       state.pagination = {
         total,
         page_number,
@@ -59,7 +59,8 @@ export const fetchBestPodcasts = (page = 1) => async dispatch => {
   try {
     dispatch(getPodcastsStart())
     const response = await getBestPodcasts({ page })
-    dispatch(getPodcastsSuccess(response))
+    const payload = { ...response, collectionTitle: 'Trending' }
+    dispatch(getPodcastsSuccess(payload))
   } catch (e) {
     dispatch(getPodcastsFailure(e))
   }

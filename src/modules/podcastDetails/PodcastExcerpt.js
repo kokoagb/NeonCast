@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PodcastImage from 'components/PodcastImage'
+import PageHeading from 'components/PageHeading'
 
 const StyledDiv = styled.div`
   text-align: right;
@@ -18,7 +19,7 @@ function PodcastExcerpt({ podcast }) {
   return (
     <StyledDiv>
       <PodcastImage src={podcast.image} alt={podcast.title} />
-      <h1>{podcast.title}</h1>
+      <PageHeading>{podcast.title}</PageHeading>
       <aside>{podcast.publisher}</aside>
     </StyledDiv>
   )
