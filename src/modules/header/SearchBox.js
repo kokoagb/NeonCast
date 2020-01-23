@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Search } from 'react-feather'
 import { fetchSearchResults } from './searchResultsSlice'
 import { debounce } from 'lodash'
-import SearchResults from './SearchResults'
+import SearchSuggestions from './SearchSuggestions'
 
 const StyledForm = styled.form`
   position: relative;
@@ -96,7 +96,7 @@ function SearchBox() {
         onChange={handleChange}
         value={query}
       />
-      <SearchResults isDropdownVisible={isDropdownVisible} />
+      <SearchSuggestions isDropdownVisible={isDropdownVisible} />
       <button>search</button>
     </StyledForm>
   )

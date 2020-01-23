@@ -21,12 +21,12 @@ const StyledDiv = styled.div`
   }
 `
 
-function SearchResults({ isDropdownVisible }) {
+function SearchSuggestions({ isVisible }) {
   const { isLoading, error, podcasts } = useSelector(
     state => state.searchResults,
   )
 
-  if (isLoading || !podcasts.length || !isDropdownVisible) return null
+  if (isLoading || !podcasts.length || !isVisible) return null
   if (error) return <div>Error</div>
 
   return (
@@ -42,4 +42,4 @@ function SearchResults({ isDropdownVisible }) {
   )
 }
 
-export default SearchResults
+export default SearchSuggestions
