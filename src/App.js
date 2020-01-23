@@ -4,6 +4,7 @@ import Layout from 'components/Layout'
 import Header from 'modules/header/Header'
 import Sidebar from 'modules/sideBar/SideBar'
 import TrendingPage from 'modules/podcastList/TrendingPage'
+import SearchResultsPage from 'modules/podcastList/SearchResultsPage'
 import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
 import Player from 'modules/player/Player'
 
@@ -18,6 +19,9 @@ function App() {
         <Switch>
           <Route path="/podcasts/:id">
             <PodcastDetailPage />
+          </Route>
+          <Route path="/search">
+            <SearchResultsPage />
           </Route>
           <Route path="/">
             <TrendingPage />

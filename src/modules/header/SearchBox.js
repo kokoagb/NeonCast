@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Search } from 'react-feather'
@@ -45,6 +46,7 @@ const StyledForm = styled.form`
 
 function SearchBox() {
   const [query, setQuery] = useState('')
+  const [redirectTo, setRedirectTo] = useState(null)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
   const dispatch = useDispatch()
 
@@ -62,9 +64,13 @@ function SearchBox() {
     if (val.length > 3) runSearch(val)
   }
 
+  const handleSubmit = e => {
+    e.preventDefault()
+    setRedirectTo('/search')
+  }
+
   useEffect(() => {
     const clickHandler = e => {
-      console.log('foobar')
       const isFormClick = formRef.current.contains(e.target)
       if (isFormClick && !isDropdownVisible) setIsDropdownVisible(true)
       if (!isFormClick && isDropdownVisible) setIsDropdownVisible(false)
@@ -77,8 +83,12 @@ function SearchBox() {
     }
   }, [isDropdownVisible])
 
+  if (redirectTo) {
+    return <Redirect to={redirectTo} />
+  }
+
   return (
-    <StyledForm ref={formRef}>
+    <StyledForm onSubmit={handleSubmit} ref={formRef}>
       <Search />
       <input
         type="text"

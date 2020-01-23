@@ -16,8 +16,11 @@ function PodcastListItem({ podcast }) {
   return (
     <StyledDiv>
       <Link to={`/podcasts/${podcast.id}`}>
-        <PodcastImage src={podcast.image} alt={podcast.title} />
-        {podcast.title}
+        <PodcastImage
+          src={podcast.image}
+          alt={podcast.title || podcast.title_original}
+        />
+        {podcast.title || podcast.title_original}
       </Link>
     </StyledDiv>
   )
