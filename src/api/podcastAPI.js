@@ -18,7 +18,7 @@ export async function searchEpisodes(q) {
 
 export async function typeahead(q) {
   const { data } = await http.get('/api/typeahead', {
-    params: { q },
+    params: { q, show_podcasts: 0, show_genres: 0, safe_mode: 0 },
   })
   return data
 }
