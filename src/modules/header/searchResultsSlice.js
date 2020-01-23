@@ -6,7 +6,6 @@ const searchResults = createSlice({
   initialState: {
     isLoading: false,
     podcasts: [],
-    episodes: [],
     error: null,
   },
   reducers: {
