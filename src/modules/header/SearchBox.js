@@ -1,16 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import React, { useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Search } from 'react-feather'
-import { fetchSearchResults } from './searchResultsSlice'
+import { fetchSearchSuggestions } from './searchSuggestionsSlice'
 import { debounce } from 'lodash'
 import SearchSuggestions from './SearchSuggestions'
+
+const ARROW_UP = 'ArrowUp'
+const ARROW_DOWN = 'ArrowDown'
 
 const StyledForm = styled.form`
   position: relative;
   display: flex;
   max-width: 800px;
+
+  & .search-suggestions {
+    display: none;
+  }
+
+  &:focus-within .search-suggestions {
+    display: block;
+  }
 
   svg {
     position: absolute;
@@ -46,16 +57,18 @@ const StyledForm = styled.form`
 
 function SearchBox() {
   const [query, setQuery] = useState('')
-  const [redirectTo, setRedirectTo] = useState(null)
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
+  const [activeSuggestion, setActiveSuggestion] = useState(null)
   const dispatch = useDispatch()
+  const history = useHistory()
 
-  const formRef = useRef(null)
+  const { isLoading, error, suggestions } = useSelector(
+    state => state.searchSuggestions,
+  )
 
   const runSearch = useRef(
     debounce(query => {
-      dispatch(fetchSearchResults(query))
-    }, 1000),
+      dispatch(fetchSearchSuggestions(query))
+    }, 50),
   ).current
 
   const handleChange = e => {
@@ -64,39 +77,51 @@ function SearchBox() {
     if (val.length > 3) runSearch(val)
   }
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    setRedirectTo('/search')
+  const handleKeyDown = e => {
+    const { key } = e
+    const currentIdx = suggestions.indexOf(activeSuggestion)
+
+    if ([ARROW_UP, ARROW_DOWN].includes(key)) {
+      e.preventDefault()
+    }
+
+    if (suggestions.length === 0) {
+      return
+    }
+
+    if (key === ARROW_DOWN) {
+      setActiveSuggestion(suggestions[currentIdx + 1] || suggestions[0])
+    }
+
+    if (key === ARROW_UP) {
+      setActiveSuggestion(
+        suggestions[currentIdx - 1] || suggestions[suggestions.length - 1],
+      )
+    }
   }
 
-  useEffect(() => {
-    const clickHandler = e => {
-      const isFormClick = formRef.current.contains(e.target)
-      if (isFormClick && !isDropdownVisible) setIsDropdownVisible(true)
-      if (!isFormClick && isDropdownVisible) setIsDropdownVisible(false)
-    }
-
-    document.addEventListener('click', clickHandler)
-
-    return () => {
-      document.removeEventListener('click', clickHandler)
-    }
-  }, [isDropdownVisible])
-
-  if (redirectTo) {
-    return <Redirect to={redirectTo} />
+  const handleSubmit = e => {
+    e.preventDefault()
+    history.push('/search')
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit} ref={formRef}>
+    <StyledForm onSubmit={handleSubmit} tabIndex="0">
       <Search />
       <input
         type="text"
         placeholder="Search podcasts..."
         onChange={handleChange}
         value={query}
+        onKeyDown={handleKeyDown}
       />
-      <SearchSuggestions isDropdownVisible={isDropdownVisible} />
+      {isLoading || error || suggestions.length < 1 ? null : (
+        <SearchSuggestions
+          className="search-suggestions"
+          suggestions={suggestions}
+          activeSuggestion={activeSuggestion}
+        />
+      )}
       <button>search</button>
     </StyledForm>
   )

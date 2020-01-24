@@ -12,29 +12,34 @@ const StyledDiv = styled.div`
   z-index: 1000;
   border-radius: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  padding: 1rem 0;
 
   & ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+
+    & li {
+      padding: 0 1rem;
+
+      &.active {
+        color: white;
+        background-color: blue;
+      }
+    }
   }
 `
 
-function SearchSuggestions({ isVisible }) {
-  const { isLoading, error, podcasts } = useSelector(
-    state => state.searchResults,
-  )
-
-  if (isLoading || !podcasts.length || !isVisible) return null
-  if (error) return <div>Error</div>
-
+function SearchSuggestions({ suggestions, activeSuggestion, className }) {
   return (
-    <StyledDiv className="search-results">
+    <StyledDiv className={className}>
       <ul>
-        {podcasts.map(podcast => (
-          <li key={podcast.id}>
-            <Link to={`/podcasts/${podcast.id}`}>{podcast.title_original}</Link>
+        {suggestions.map(suggestion => (
+          <li
+            key={suggestion}
+            className={suggestion === activeSuggestion ? 'active' : ''}
+          >
+            {suggestion}
           </li>
         ))}
       </ul>
