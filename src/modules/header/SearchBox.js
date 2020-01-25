@@ -89,9 +89,7 @@ function SearchBox() {
       return
     }
 
-    if (suggestions.length === 0) {
-      return
-    }
+    if (suggestions.length === 0) return
 
     const newSuggestion =
       (key === ARROW_DOWN
@@ -104,7 +102,8 @@ function SearchBox() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    history.push('/search')
+    if (!query) return
+    history.push(`/search/${query}`)
   }
 
   return (

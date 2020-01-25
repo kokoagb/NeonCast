@@ -20,7 +20,7 @@ function App() {
           <Route path="/podcasts/:id">
             <PodcastDetailPage />
           </Route>
-          <Route path="/search">
+          <Route path="/search/:query">
             <SearchResultsPage />
           </Route>
           <Route path="/">
