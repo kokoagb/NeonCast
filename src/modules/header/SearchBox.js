@@ -57,6 +57,7 @@ const StyledForm = styled.form`
 
 function SearchBox() {
   const [query, setQuery] = useState('')
+  const [cachedQuery, setCachedQuery] = useState('')
   const [activeSuggestion, setActiveSuggestion] = useState(null)
   const dispatch = useDispatch()
   const history = useHistory()
@@ -74,6 +75,7 @@ function SearchBox() {
   const handleChange = e => {
     const val = e.target.value
     setQuery(val)
+    setCachedQuery(val)
     if (val.length > 3) runSearch(val)
   }
 
@@ -83,21 +85,21 @@ function SearchBox() {
 
     if ([ARROW_UP, ARROW_DOWN].includes(key)) {
       e.preventDefault()
+    } else {
+      return
     }
 
     if (suggestions.length === 0) {
       return
     }
 
-    if (key === ARROW_DOWN) {
-      setActiveSuggestion(suggestions[currentIdx + 1] || suggestions[0])
-    }
-
-    if (key === ARROW_UP) {
-      setActiveSuggestion(
-        suggestions[currentIdx - 1] || suggestions[suggestions.length - 1],
-      )
-    }
+    const newSuggestion =
+      (key === ARROW_DOWN
+        ? suggestions[currentIdx + 1]
+        : suggestions[currentIdx - 1]) || null
+    const newQuery = newSuggestion || cachedQuery
+    setActiveSuggestion(newSuggestion)
+    setQuery(newQuery)
   }
 
   const handleSubmit = e => {
