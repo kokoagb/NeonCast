@@ -4,13 +4,20 @@ import styled from 'styled-components'
 import { Loader, Play, Pause } from 'react-feather'
 import { throttle } from 'lodash'
 import { getFormattedTime } from 'common/utils'
+import Slider from 'rc-slider'
 
 const StyledDiv = styled.div`
+  position: relative;
   grid-area: player;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   z-index: 1;
   background-color: white;
+
+  .slider {
+    position: absolute;
+    top: -5px;
+  }
 
   img {
     float: left;
@@ -60,8 +67,13 @@ function Player() {
     }
   }
 
+  const handleSliderChange = value => {
+    playerEl.current.currentTime = value
+    setCurrentTime(value)
+  }
+
   const handleTimeUpdate = throttle(() => {
-    setCurrentTime(getFormattedTime(playerEl.current.currentTime))
+    setCurrentTime(playerEl.current.currentTime)
   }, 1000)
 
   if (!nowPlaying) return null
@@ -73,10 +85,19 @@ function Player() {
     </button>
   ) : null
 
-  const totalTime = getFormattedTime(nowPlaying.audio_length_sec)
+  const totalTime = nowPlaying.audio_length_sec
 
   return (
     <StyledDiv>
+      <Slider
+        className="slider"
+        min={0}
+        max={totalTime}
+        value={currentTime}
+        tipFormatter={getFormattedTime}
+        onChange={handleSliderChange}
+      />
+
       <img src={nowPlaying.image} alt={nowPlaying.title} />
 
       <div>
@@ -86,7 +107,7 @@ function Player() {
       <div>{nowPlaying.title}</div>
       <div>
         <small className="monospace">
-          {currentTime}/{totalTime}
+          {getFormattedTime(currentTime)}/{getFormattedTime(totalTime)}
         </small>
       </div>
       <audio
