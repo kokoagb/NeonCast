@@ -5,7 +5,16 @@ const app = express()
 
 dotenv.config()
 
-const endpoints = ['/search', '/typeahead', '/best_podcasts', '/podcasts/:id']
+const endpoints = [
+  '/search',
+  '/typeahead',
+  '/best_podcasts',
+  '/curated_pocasts',
+  '/genres',
+  '/episodes',
+  '/podcasts/:id',
+  '/epidodes/:id',
+]
 
 const http = axios.create({
   baseURL: 'https://listen-api.listennotes.com/api/v2',
