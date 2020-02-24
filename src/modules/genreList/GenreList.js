@@ -20,7 +20,7 @@ function GenreList({ genres }) {
     <StyledUl>
       {genres.map(genre => (
         <li key={genre.id}>
-          <GenreListItem>{genre.name}</GenreListItem>
+          <GenreListItem genre={genre} />
         </li>
       ))}
     </StyledUl>

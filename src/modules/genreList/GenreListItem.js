@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-function GenreListItem({ className, children }) {
-  return <div className={className}>{children}</div>
+function GenreListItem({ className, genre }) {
+  return (
+    <div className={className}>
+      <Link to={`/genres/${genre.id}`}>{genre.name}</Link>
+    </div>
+  )
 }
 
 export default styled(GenreListItem)`

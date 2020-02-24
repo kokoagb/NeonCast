@@ -55,10 +55,10 @@ export const {
   updatePageNumber,
 } = podcastList.actions
 
-export const fetchBestPodcasts = (page = 1) => async dispatch => {
+export const fetchBestPodcasts = (page = 1, genre_id) => async dispatch => {
   try {
     dispatch(getPodcastsStart())
-    const response = await getBestPodcasts({ page })
+    const response = await getBestPodcasts({ page, genre_id })
     const payload = { ...response, collectionTitle: 'Trending' }
     dispatch(getPodcastsSuccess(payload))
   } catch (e) {

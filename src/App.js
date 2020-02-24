@@ -6,6 +6,7 @@ import Sidebar from 'modules/sideBar/SideBar'
 import TrendingPage from 'modules/podcastList/TrendingPage'
 import SearchResultsPage from 'modules/podcastList/SearchResultsPage'
 import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
+import GenrePodcasts from 'modules/podcastList/GenrePodcastsPage'
 import GenreListPage from 'modules/genreList/GenreListPage'
 import Player from 'modules/player/Player'
 
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/search/:query">
             <SearchResultsPage />
+          </Route>
+          <Route path="/genres/:genre_id">
+            <GenrePodcasts />
           </Route>
           <Route path="/genres">
             <GenreListPage />
