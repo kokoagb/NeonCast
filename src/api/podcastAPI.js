@@ -32,3 +32,8 @@ export async function getPodcast(id) {
   const { data } = await http.get(`/api/podcasts/${id}`)
   return data
 }
+
+export async function getGenres() {
+  const { data } = await http.get(`/api/genres`)
+  return data
+}

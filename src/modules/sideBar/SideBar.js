@@ -30,6 +30,11 @@ function Sidebar() {
       location: '/',
       match: useRouteMatch('/'),
     },
+    {
+      name: 'Genres',
+      location: '/genres',
+      match: useRouteMatch('/genres'),
+    },
   ]
 
   const renderedMenuItems = menuItems.map(item => (
