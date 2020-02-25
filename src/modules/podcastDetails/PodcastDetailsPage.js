@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import ReactSafeHtml from 'react-safe-html'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,10 +14,15 @@ const StyledMain = styled.main`
   padding-left: 1rem;
   grid-template-columns: 300px 1fr;
 
-  & .grid-right {
+  .grid-right {
     text-align: justify;
     padding: 0 1rem;
     overflow-y: auto;
+  }
+
+  .podcast-description {
+    border-bottom: 1px solid #e8e8e8;
+    padding-bottom: 1rem;
   }
 `
 
@@ -41,7 +47,9 @@ function PodcastDetailPage() {
         <PodcastExcerpt podcast={podcast} />
       </div>
       <div className="grid-right">
-        <div className="podcast-description">{podcast.description}</div>
+        <div className="podcast-description">
+          <ReactSafeHtml html={podcast.description} />
+        </div>
         <EpisodeList episodes={podcast.episodes} />
       </div>
     </StyledMain>
