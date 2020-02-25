@@ -10,12 +10,13 @@ function TrendingPage() {
   const { isLoading, error, podcasts } = useSelector(
     state => state.searchResults,
   )
+  const title = `Search Results for ${query}`
 
   useEffect(() => {
     dispatch(fetchSearchResults(query))
   }, [query, dispatch])
 
-  return <PodcastListPage title={'Search Results'} podcasts={podcasts} />
+  return <PodcastListPage title={title} podcasts={podcasts} />
 }
 
 export default TrendingPage

@@ -30,7 +30,13 @@ export const {
   getGenresFailure,
 } = genres.actions
 
-export const fetchGenres = () => async dispatch => {
+export const fetchGenres = () => async (dispatch, getState) => {
+  const { genres } = getState()
+
+  if (genres.isLoading || genres.genres.length > 0) {
+    return
+  }
+
   try {
     dispatch(getGenresStart())
     const response = await getGenres()
