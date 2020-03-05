@@ -1,6 +1,8 @@
+const path = require('path')
 const axios = require('axios')
 const dotenv = require('dotenv')
 const express = require('express')
+const port = process.env.PORT || 3001
 const app = express()
 
 dotenv.config()
@@ -23,6 +25,10 @@ const http = axios.create({
   },
 })
 
+app.get('/health', (req, res) => {
+  res.send('OK')
+})
+
 endpoints.forEach(endpoint => {
   app.get(`/api${endpoint}`, async (req, res) => {
     const response = await makeRequest(endpoint, req.query, req.params)
@@ -37,6 +43,15 @@ function makeRequest(endpoint, query, { id }) {
   })
 }
 
-app.listen(3001, () => {
-  console.log('Listening on port 3001')
+if (process.env.NODE_ENV === 'production') {
+  const publicPath = path.join(__dirname, 'build')
+  app.use(express.static(publicPath))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(publicPath, 'index.html'))
+  })
+}
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
 })
