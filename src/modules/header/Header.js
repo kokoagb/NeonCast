@@ -7,6 +7,7 @@ const StyledHeader = styled.header`
   grid-area: header;
   display: grid;
   grid-template-columns: 250px auto;
+  background-color: #252525;
 
   .search-box-wrapper {
     display: flex;

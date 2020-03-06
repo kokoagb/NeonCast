@@ -11,6 +11,7 @@ const StyledMain = styled.main`
   display: grid;
   grid-area: main;
   overflow-y: hidden;
+  padding-top: 1rem;
   padding-left: 1rem;
   grid-template-columns: 300px 1fr;
 

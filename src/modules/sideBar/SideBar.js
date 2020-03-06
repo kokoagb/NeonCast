@@ -11,14 +11,15 @@ const StyledUl = styled.ul`
   padding: 0;
 
   li {
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
 
     &.active {
-    background-color: black;
-    border-radius: 0 2rem 2rem 0;
+      background-color: black;
+      border-radius: 0 2rem 2rem 0;
 
-    & a {
-      color: white;
+      & a {
+        color: white;
+      }
     }
   }
 `
