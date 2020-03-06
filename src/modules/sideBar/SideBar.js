@@ -5,6 +5,10 @@ import { Activity, Coffee } from 'react-feather'
 
 const StyledDiv = styled.div`
   grid-area: sidebar;
+
+  @media only screen and (max-width: 800px) {
+    display: none;
+  }
 `
 
 const StyledUl = styled.ul`
@@ -13,6 +17,7 @@ const StyledUl = styled.ul`
 
   li {
     padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
 
     a {
       display: flex;

@@ -14,6 +14,14 @@ const StyledDiv = styled.div`
     'header header'
     'sidebar main'
     ${props => (props.isPlayerVisible ? "'player player'" : '')};
+
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'header'
+      'main'
+      ${props => (props.isPlayerVisible ? "'player'" : '')};
+  }
 `
 
 function Layout({ children }) {
