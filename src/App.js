@@ -31,6 +31,9 @@ function App() {
           <Route path="/genres">
             <GenreListPage />
           </Route>
+          <Route path="/subscriptions">
+            <div style={{ padding: '1rem' }}>Coming soon</div>
+          </Route>
           <Route path="/">
             <TrendingPage />
           </Route>

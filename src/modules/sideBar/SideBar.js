@@ -1,10 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useRouteMatch, Link } from 'react-router-dom'
-import { Activity, Coffee } from 'react-feather'
+import { Activity, Coffee, Heart } from 'react-feather'
 
 const StyledDiv = styled.div`
   grid-area: sidebar;
+  position: relative;
+  padding-right: 1rem;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10%;
+    right: 0;
+    width: 1px;
+    bottom: 10%;
+    background-color: rgb(244, 200, 255);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgb(244, 200, 255) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
 
   @media only screen and (max-width: 800px) {
     display: none;
@@ -16,8 +35,7 @@ const StyledUl = styled.ul`
   padding: 0;
 
   li {
-    padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
 
     a {
       display: flex;
@@ -30,8 +48,13 @@ const StyledUl = styled.ul`
     }
 
     &.active {
-      background-color: #252525;
-      border-radius: 0 2rem 2rem 0;
+      background-color: rgba(152, 0, 240, 1);
+      background: linear-gradient(
+        to right,
+        rgba(152, 0, 240, 1) 0%,
+        rgba(198, 12, 245, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
 
       & a {
         color: white;
@@ -53,6 +76,12 @@ function Sidebar() {
       location: '/genres',
       match: useRouteMatch('/genres'),
       icon: <Coffee />,
+    },
+    {
+      name: 'My podcasts',
+      location: '/subscriptions',
+      match: useRouteMatch('/subscriptions'),
+      icon: <Heart />,
     },
   ]
 
