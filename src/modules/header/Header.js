@@ -15,6 +15,14 @@ const StyledHeader = styled.header`
     flex-direction: column;
     justify-content: center;
   }
+
+  @media only screen and (max-width: 800px) {
+    display: flex;
+    .search-box-wrapper {
+      padding-left: 0;
+      flex: 1;
+    }
+  }
 `
 
 function header() {

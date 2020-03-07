@@ -7,10 +7,26 @@ const StyledDiv = styled.div`
   padding: 0 1rem;
   align-items: center;
 
-  a,
-  img {
+  a {
+    display: block;
+  }
+
+  .logo {
     display: block;
     width: 100%;
+
+    @media only screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  .logo_m {
+    display: none;
+    width: 2.3rem;
+
+    @media only screen and (max-width: 800px) {
+      display: block;
+    }
   }
 `
 
@@ -18,7 +34,8 @@ function Logo() {
   return (
     <StyledDiv>
       <Link to="/">
-        <img src="/logo.svg" alt="logo" />
+        <img class="logo" src="/logo.svg" alt="logo" />
+        <img class="logo_m" src="/logo_m.svg" alt="logo" />
       </Link>
     </StyledDiv>
   )
