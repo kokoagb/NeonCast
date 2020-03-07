@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
 
   .search-box-wrapper {
     display: flex;
-    padding-left: 1rem;
+    padding: 0 1rem;
     flex-direction: column;
     justify-content: center;
   }
