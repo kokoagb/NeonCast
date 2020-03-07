@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useRouteMatch, Link } from 'react-router-dom'
-import { Activity, Coffee, Heart } from 'react-feather'
+import SidebarNavList from './SidebarNavList'
 
 const StyledDiv = styled.div`
   grid-area: sidebar;
@@ -29,76 +28,10 @@ const StyledDiv = styled.div`
   }
 `
 
-const StyledUl = styled.ul`
-  list-style-type: none;
-  padding: 0;
-
-  li {
-    padding: 1rem;
-
-    a {
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-
-      svg {
-        margin-right: 1rem;
-      }
-    }
-
-    &.active {
-      background-color: rgba(152, 0, 240, 1);
-      background: linear-gradient(
-        to right,
-        rgba(152, 0, 240, 1) 0%,
-        rgba(198, 12, 245, 0.5) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-
-      & a {
-        color: white;
-      }
-    }
-  }
-`
-
 function Sidebar() {
-  const menuItems = [
-    {
-      name: 'Trending',
-      location: '/',
-      match: useRouteMatch('/'),
-      icon: <Activity />,
-    },
-    {
-      name: 'Genres',
-      location: '/genres',
-      match: useRouteMatch('/genres'),
-      icon: <Coffee />,
-    },
-    {
-      name: 'My podcasts',
-      location: '/subscriptions',
-      match: useRouteMatch('/subscriptions'),
-      icon: <Heart />,
-    },
-  ]
-
-  const renderedMenuItems = menuItems.map(item => (
-    <li
-      key={item.location}
-      className={item.match && item.match.isExact ? 'active' : ''}
-    >
-      <Link to={item.location}>
-        {item.icon}
-        {item.name}
-      </Link>
-    </li>
-  ))
-
   return (
     <StyledDiv>
-      <StyledUl>{renderedMenuItems}</StyledUl>
+      <SidebarNavList />
     </StyledDiv>
   )
 }

@@ -34,8 +34,8 @@ function Logo() {
   return (
     <StyledDiv>
       <Link to="/">
-        <img class="logo" src="/logo.svg" alt="logo" />
-        <img class="logo_m" src="/logo_m.svg" alt="logo" />
+        <img className="logo" src="/logo.svg" alt="logo" />
+        <img className="logo_m" src="/logo_m.svg" alt="logo" />
       </Link>
     </StyledDiv>
   )
