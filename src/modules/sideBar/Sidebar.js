@@ -34,6 +34,7 @@ const StyledDiv = styled.div`
     padding-top: 70px;
     padding-right: 1rem;
     position: relative;
+    z-index: 1;
 
     &:after {
       display: block;
