@@ -9,6 +9,7 @@ import PodcastDetailPage from 'modules/podcastDetails/PodcastDetailsPage'
 import GenrePodcasts from 'modules/podcastList/GenrePodcastsPage'
 import GenreListPage from 'modules/genreList/GenreListPage'
 import Player from 'modules/player/Player'
+import Main from 'components/Main'
 
 import './App.css'
 
@@ -32,7 +33,7 @@ function App() {
             <GenreListPage />
           </Route>
           <Route path="/subscriptions">
-            <div style={{ padding: '1rem' }}>Coming soon</div>
+            <Main>Coming soon</Main>
           </Route>
           <Route path="/">
             <TrendingPage />

@@ -6,14 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchPodcast } from './podcastDetailsSlice'
 import PodcastExcerpt from './PodcastExcerpt'
 import EpisodeList from './EpisodeList'
+import Main from 'components/Main'
 
-const StyledMain = styled.main`
-  display: grid;
-  grid-area: main;
-  overflow-y: hidden;
+const StyledMain = styled(Main)`
   padding-top: 1rem;
-  padding-left: 1rem;
-  grid-template-columns: 300px 1fr;
 
   .grid-right {
     text-align: justify;
@@ -24,6 +20,13 @@ const StyledMain = styled.main`
   .podcast-description {
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 1rem;
+  }
+
+  @media only screen and (min-width: 800px) {
+    display: grid;
+    overflow-y: hidden;
+    padding-top: 1rem;
+    grid-template-columns: 300px 1fr;
   }
 `
 

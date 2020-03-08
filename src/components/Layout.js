@@ -4,28 +4,12 @@ import styled from 'styled-components'
 
 const StyledDiv = styled.div`
   height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 70px ${props =>
-      props.isPlayerVisible
-        ? 'calc(100vh - 240px) 100px 70px'
-        : 'calc(100vh - 140px)'} 70px;
-  grid-template-areas:
-    'header'
-    'main'
-    ${props => (props.isPlayerVisible ? "'player'" : '')}
-    'sidebar';
+  display: block;
 
   @media only screen and (min-width: 800px) {
+    display: grid;
     grid-template-columns: 250px auto;
-    grid-template-rows: 70px ${props =>
-        props.isPlayerVisible
-          ? 'calc(100vh - 170px) 100px'
-          : 'calc(100vh - 70px)'};
-    grid-template-areas:
-      'header header'
-      'sidebar main'
-      ${props => (props.isPlayerVisible ? "'player player'" : '')};
+    grid-template-areas: 'sidebar main';
   }
 `
 

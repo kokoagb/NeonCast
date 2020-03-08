@@ -8,14 +8,15 @@ const StyledDiv = styled.div`
   padding-right: 0;
   bottom: 0;
   left: 0;
-  height: 70px;
   width: 100%;
+  background-color: white;
+  z-index: 1;
 
   &:after {
     content: '';
     display: none;
     position: absolute;
-    top: 10%;
+    top: calc(70px + 10%);
     right: 0;
     width: 1px;
     bottom: 10%;
@@ -29,6 +30,8 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 800px) {
+    width: auto;
+    padding-top: 70px;
     padding-right: 1rem;
     position: relative;
 

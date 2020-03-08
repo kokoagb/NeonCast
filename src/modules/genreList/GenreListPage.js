@@ -4,12 +4,7 @@ import styled from 'styled-components'
 import GenreList from './GenreList'
 import PageHeading from 'components/PageHeading'
 import { fetchGenres } from './genresSlice'
-
-const StyledMain = styled.main`
-  grid-area: main;
-  overflow-y: auto;
-  padding: 0 1rem;
-`
+import Main from 'components/Main'
 
 function GenreListPage() {
   const dispatch = useDispatch()
@@ -20,10 +15,10 @@ function GenreListPage() {
   }, [dispatch])
 
   return (
-    <StyledMain className="podcast-list">
+    <Main className="podcast-list">
       <PageHeading>Genres</PageHeading>
       <GenreList genres={genres} />
-    </StyledMain>
+    </Main>
   )
 }
 

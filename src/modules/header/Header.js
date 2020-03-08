@@ -4,10 +4,14 @@ import Logo from './Logo'
 import SearchBox from './SearchBox'
 
 const StyledHeader = styled.header`
-  grid-area: header;
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
   display: flex;
   grid-template-columns: 250px auto;
   background-color: #252525;
+  z-index: 2;
 
   .search-box-wrapper {
     display: flex;
