@@ -5,7 +5,7 @@ import SidebarNavList from './SidebarNavList'
 const StyledDiv = styled.div`
   grid-area: sidebar;
   position: relative;
-  padding-right: 1rem;
+  padding-right: 0;
 
   &:after {
     content: '';
@@ -24,8 +24,8 @@ const StyledDiv = styled.div`
     );
   }
 
-  @media only screen and (max-width: 800px) {
-    padding-right: 0;
+  @media only screen and (min-width: 800px) {
+    padding-right: 1rem;
   }
 `
 

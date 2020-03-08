@@ -6,12 +6,15 @@ import SidebarNavListItem from './SidebarNavListItem'
 
 const StyledUl = styled.ul`
   list-style-type: none;
+  display: flex;
+  height: 100%;
   padding: 0;
+  margin: 0;
 
-  @media only screen and (max-width: 800px) {
-    display: flex;
-    margin: 0;
-    height: 100%;
+  @media only screen and (min-width: 800px) {
+    display: block;
+    height: auto;
+    margin-top: 1rem;
   }
 `
 

@@ -12,20 +12,20 @@ const StyledDiv = styled.div`
   }
 
   .logo {
-    display: block;
+    display: none;
     width: 100%;
 
-    @media only screen and (max-width: 800px) {
-      display: none;
+    @media only screen and (min-width: 800px) {
+      display: block;
     }
   }
 
   .logo_m {
-    display: none;
+    display: block;
     width: 2.3rem;
 
-    @media only screen and (max-width: 800px) {
-      display: block;
+    @media only screen and (min-width: 800px) {
+      display: none;
     }
   }
 `

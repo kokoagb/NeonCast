@@ -5,26 +5,27 @@ import styled from 'styled-components'
 const StyledDiv = styled.div`
   height: 100vh;
   display: grid;
-  grid-template-columns: 250px auto;
+  grid-template-columns: 1fr;
   grid-template-rows: 70px ${props =>
       props.isPlayerVisible
-        ? 'calc(100vh - 170px) 100px'
-        : 'calc(100vh - 70px)'};
+        ? 'calc(100vh - 240px) 100px 70px'
+        : 'calc(100vh - 140px)'} 70px;
   grid-template-areas:
-    'header header'
-    'sidebar main'
-    ${props => (props.isPlayerVisible ? "'player player'" : '')};
-  @media only screen and (max-width: 800px) {
-    grid-template-columns: 1fr;
+    'header'
+    'main'
+    ${props => (props.isPlayerVisible ? "'player'" : '')}
+    'sidebar';
+
+  @media only screen and (min-width: 800px) {
+    grid-template-columns: 250px auto;
     grid-template-rows: 70px ${props =>
         props.isPlayerVisible
-          ? 'calc(100vh - 240px) 100px 70px'
-          : 'calc(100vh - 140px)'} 70px;
+          ? 'calc(100vh - 170px) 100px'
+          : 'calc(100vh - 70px)'};
     grid-template-areas:
-      'header'
-      'main'
-      ${props => (props.isPlayerVisible ? "'player'" : '')}
-      'sidebar';
+      'header header'
+      'sidebar main'
+      ${props => (props.isPlayerVisible ? "'player player'" : '')};
   }
 `
 

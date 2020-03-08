@@ -5,22 +5,23 @@ import SearchBox from './SearchBox'
 
 const StyledHeader = styled.header`
   grid-area: header;
-  display: grid;
+  display: flex;
   grid-template-columns: 250px auto;
   background-color: #252525;
 
   .search-box-wrapper {
     display: flex;
-    padding: 0 1rem;
+    padding-right: 1rem;
     flex-direction: column;
     justify-content: center;
+    flex: 1;
   }
 
-  @media only screen and (max-width: 800px) {
-    display: flex;
+  @media only screen and (min-width: 800px) {
+    display: grid;
+
     .search-box-wrapper {
-      padding-left: 0;
-      flex: 1;
+      padding-left: 1rem;
     }
   }
 `
