@@ -4,12 +4,16 @@ import SidebarNavList from './SidebarNavList'
 
 const StyledDiv = styled.div`
   grid-area: sidebar;
-  position: relative;
+  position: fixed;
   padding-right: 0;
+  bottom: 0;
+  left: 0;
+  height: 70px;
+  width: 100%;
 
   &:after {
     content: '';
-    display: block;
+    display: none;
     position: absolute;
     top: 10%;
     right: 0;
@@ -26,6 +30,11 @@ const StyledDiv = styled.div`
 
   @media only screen and (min-width: 800px) {
     padding-right: 1rem;
+    position: relative;
+
+    &:after {
+      display: block;
+    }
   }
 `
 
