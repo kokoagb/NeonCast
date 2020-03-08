@@ -7,8 +7,10 @@ import { getFormattedTime } from 'common/utils'
 import Slider from 'rc-slider'
 
 const StyledDiv = styled.div`
-  position: relative;
-  grid-area: player;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   z-index: 1;
@@ -35,6 +37,10 @@ const StyledDiv = styled.div`
 
   .monospace {
     font-family: monospace;
+  }
+
+  @media only screen and (min-width: 800px) {
+    bottom: 0;
   }
 `
 

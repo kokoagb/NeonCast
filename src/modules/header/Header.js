@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
   display: flex;
   grid-template-columns: 250px auto;
   background-color: #252525;
-  z-index: 2;
+  z-index: 3;
 
   .search-box-wrapper {
     display: flex;
