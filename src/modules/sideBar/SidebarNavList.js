@@ -7,6 +7,12 @@ import SidebarNavListItem from './SidebarNavListItem'
 const StyledUl = styled.ul`
   list-style-type: none;
   padding: 0;
+
+  @media only screen and (max-width: 800px) {
+    display: flex;
+    margin: 0;
+    height: 100%;
+  }
 `
 
 function SidebarNavList() {

@@ -28,6 +28,30 @@ const StyledLi = styled.li`
       color: white;
     }
   }
+
+  @media only screen and (max-width: 800px) {
+    font-size: 10px;
+    flex: 1;
+
+    &.active {
+      background-color: rgba(152, 0, 240, 1);
+      background: linear-gradient(
+        to bottom,
+        rgba(152, 0, 240, 1) 0%,
+        rgba(198, 12, 245, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+
+    a {
+      display: flex;
+      flex-direction: column;
+
+      svg {
+        margin: 0;
+      }
+    }
+  }
 `
 
 function SidebarNavListItem({ item }) {

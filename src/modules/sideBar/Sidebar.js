@@ -25,6 +25,7 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (max-width: 800px) {
+    padding-right: 0;
   }
 `
 
