@@ -7,6 +7,7 @@ import { getFormattedTime } from 'common/utils'
 import Slider from 'rc-slider'
 
 const StyledDiv = styled.div`
+  height: 100px;
   position: fixed;
   bottom: 70px;
   left: 0;
@@ -15,16 +16,43 @@ const StyledDiv = styled.div`
   text-align: center;
   z-index: 1;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .rc-slider-track {
+    background-color: #9801f0;
+  }
 
   .slider {
     position: absolute;
-    top: -5px;
+    top: -9px;
+    z-index: 1;
   }
 
-  img {
-    float: left;
-    width: 100px;
-    height: 100px;
+  .player-left {
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 100px;
+      height: 100px;
+    }
+
+    button,
+    span {
+      padding: 1rem;
+    }
+
+    button {
+      outline: none;
+    }
+
+    svg {
+      width: 4rem;
+      height: 4rem;
+    }
   }
 
   button {
@@ -84,7 +112,11 @@ function Player() {
 
   if (!nowPlaying) return null
 
-  const loader = isLoading ? <Loader className="icon spin" /> : null
+  const loader = isLoading ? (
+    <span>
+      <Loader className="icon spin" />
+    </span>
+  ) : null
   const playPause = !isLoading ? (
     <button onClick={handlePlayPauseClick}>
       {isPlaying ? <Pause className="icon" /> : <Play className="icon" />}
@@ -104,9 +136,8 @@ function Player() {
         onChange={handleSliderChange}
       />
 
-      <img src={nowPlaying.image} alt={nowPlaying.title} />
-
-      <div>
+      <div class="player-left">
+        <img src={nowPlaying.image} alt={nowPlaying.title} />
         {loader}
         {playPause}
       </div>
