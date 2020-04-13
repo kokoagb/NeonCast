@@ -2,22 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 import blankImage from 'common/blankImage'
 
-const bgAnimation = keyframes`
-  0%{background-position:50% 0%}
-  50%{background-position:51% 100%}
-  100%{background-position:50% 0%}
-`
-
-const StyledImg = styled.img`
-  width: 100%;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(0deg, #ffffff, #dfdfdf);
-  background-size: 400% 400%;
-  animation: ${bgAnimation} 3s ease infinite;
-`
-
-function PodcastImage({ src, alt }) {
+function PodcastImage({ src, alt, className }) {
   const [isLoading, setIsLoading] = useState(true)
   const imgEventListener = () => setIsLoading(false)
 
@@ -33,7 +18,25 @@ function PodcastImage({ src, alt }) {
     }
   }, [src])
 
-  return <StyledImg src={isLoading ? blankImage : src} alt={alt} />
+  return (
+    <img src={isLoading ? blankImage : src} alt={alt} className={className} />
+  )
 }
 
-export default PodcastImage
+const bgAnimation = keyframes`
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+`
+
+const StyledPodcastImage = styled(PodcastImage)`
+  width: 100%;
+  border-radius: ${({ isRounded = true }) => (isRounded ? '0.5rem' : '0')};
+  box-shadow: ${({ hasShadow = true }) =>
+    hasShadow ? '0 0 10px rgba(0, 0, 0, 0.2)' : 'none'};
+  background: linear-gradient(0deg, #ffffff, #dfdfdf);
+  background-size: 400% 400%;
+  animation: ${bgAnimation} 3s ease infinite;
+`
+
+export default StyledPodcastImage

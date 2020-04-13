@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { Loader, Play, Pause } from 'react-feather'
 import { throttle } from 'lodash'
 import { getFormattedTime } from 'common/utils'
+import PlaybackButton from 'components/PlaybackButton'
 import Slider from 'rc-slider'
+import PlayerEpisodeThumb from './PlayerEpisodeThumb'
+import Loader from 'components/Loader'
 
 const StyledDiv = styled.div`
   height: 100px;
@@ -13,7 +15,7 @@ const StyledDiv = styled.div`
   left: 0;
   width: 100%;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  align-items: center;
   z-index: 1;
   background-color: white;
   display: flex;
@@ -32,27 +34,8 @@ const StyledDiv = styled.div`
 
   .player-left {
     position: absolute;
-    display: flex;
-    align-items: center;
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
-
-    button,
-    span {
-      padding: 1rem;
-    }
-
-    button {
-      outline: none;
-    }
-
-    svg {
-      width: 4rem;
-      height: 4rem;
-    }
+    top: 0;
+    left: 0;
   }
 
   button {
@@ -112,15 +95,12 @@ function Player() {
 
   if (!nowPlaying) return null
 
-  const loader = isLoading ? (
-    <span>
-      <Loader className="icon spin" />
-    </span>
-  ) : null
+  const loader = isLoading ? <Loader className="spin" /> : null
   const playPause = !isLoading ? (
-    <button onClick={handlePlayPauseClick}>
-      {isPlaying ? <Pause className="icon" /> : <Play className="icon" />}
-    </button>
+    <PlaybackButton
+      onClick={handlePlayPauseClick}
+      state={isPlaying ? 'pause' : 'play'}
+    />
   ) : null
 
   const totalTime = nowPlaying.audio_length_sec
@@ -136,17 +116,21 @@ function Player() {
         onChange={handleSliderChange}
       />
 
-      <div class="player-left">
-        <img src={nowPlaying.image} alt={nowPlaying.title} />
-        {loader}
-        {playPause}
-      </div>
+      <PlayerEpisodeThumb
+        src={nowPlaying.image}
+        alt="{nowPlaying.title}"
+        className="player-left"
+      />
+
+      {loader}
+      {playPause}
+
       <div>{nowPlaying.title}</div>
-      <div>
-        <small className="monospace">
-          {getFormattedTime(currentTime)}/{getFormattedTime(totalTime)}
-        </small>
-      </div>
+
+      <small className="monospace">
+        {getFormattedTime(currentTime)}/{getFormattedTime(totalTime)}
+      </small>
+
       <audio
         ref={playerEl}
         onCanPlay={handleCanPlay}
