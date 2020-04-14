@@ -11,11 +11,11 @@ const StyledButton = styled.button`
   cursor: pointer;
 `
 
-function EpisodePlayButton({ episode }) {
+function EpisodePlayButton({ podcast, episode }) {
   const dispatch = useDispatch()
 
   return (
-    <StyledButton onClick={e => dispatch(play(episode))}>
+    <StyledButton onClick={e => dispatch(play({ ...episode, podcast }))}>
       <PlayCircle className="icon" />
     </StyledButton>
   )

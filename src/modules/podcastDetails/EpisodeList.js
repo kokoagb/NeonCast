@@ -7,10 +7,10 @@ const StyledUl = styled.ul`
   padding: 0;
 `
 
-function EpisodeList({ episodes }) {
+function EpisodeList({ podcast, episodes }) {
   const renderedEpisodes = episodes.map(episode => (
     <li key={episode.id}>
-      <EpisodeListItem episode={episode} />
+      <EpisodeListItem podcast={podcast} episode={episode} />
     </li>
   ))
 

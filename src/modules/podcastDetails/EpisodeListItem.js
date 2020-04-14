@@ -19,10 +19,10 @@ const StyledDiv = styled.div`
   }
 `
 
-function EpisodeListItem({ episode }) {
+function EpisodeListItem({ podcast, episode }) {
   return (
     <StyledDiv>
-      <EpisodePlayButton episode={episode} />
+      <EpisodePlayButton podcast={podcast} episode={episode} />
       <div className="episode-title">{episode.title}</div>
     </StyledDiv>
   )

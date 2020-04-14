@@ -54,7 +54,7 @@ function PodcastDetailPage() {
         <div className="podcast-description">
           <ReactSafeHtml html={podcast.description} />
         </div>
-        <EpisodeList episodes={podcast.episodes} />
+        <EpisodeList podcast={podcast} episodes={podcast.episodes} />
       </div>
     </StyledMain>
   )
