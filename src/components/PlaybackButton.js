@@ -13,15 +13,16 @@ function PlayButton({ className, onClick = () => {}, state = 'play' }) {
   )
 }
 
-const StyledPlayButton = styled(PlayButton)`
+export default styled(PlayButton)`
   width: 3rem;
   height: 3rem;
+  border: none;
   outline: none;
+  padding: 0;
+  cursor: pointer;
   border-radius: 50%;
 
   &:focus {
     box-shadow: 0 0 0 4px #b3f3ac;
   }
 `
-
-export default StyledPlayButton

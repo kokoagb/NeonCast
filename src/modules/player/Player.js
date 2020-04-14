@@ -3,59 +3,15 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { throttle } from 'lodash'
 import { getFormattedTime } from 'common/utils'
-import PlaybackButton from 'components/PlaybackButton'
 import Slider from 'rc-slider'
-import PlayerEpisodeThumb from './PlayerEpisodeThumb'
 import Loader from 'components/Loader'
+import PlaybackButton from 'components/PlaybackButton'
+import PlayerEpisodeThumb from './PlayerEpisodeThumb'
+import PlayerEpisodeTitle from './PlayerEpisodeTitle'
+import PlayerPodcastTitle from './PlayerPodcastTitle'
+import PlayerProgressIndicator from './PlayerProgressIndicator'
 
-const StyledDiv = styled.div`
-  height: 100px;
-  position: fixed;
-  bottom: 70px;
-  left: 0;
-  width: 100%;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  align-items: center;
-  z-index: 1;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  .rc-slider-track {
-    background-color: #9801f0;
-  }
-
-  .slider {
-    position: absolute;
-    top: -9px;
-    z-index: 1;
-  }
-
-  .player-left {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  button {
-    border: none;
-    padding: 0;
-    margin: 0;
-    background: none;
-    cursor: pointer;
-  }
-
-  .monospace {
-    font-family: monospace;
-  }
-
-  @media only screen and (min-width: 800px) {
-    bottom: 0;
-  }
-`
-
-function Player() {
+function Player({ className }) {
   const nowPlaying = useSelector(state => state.nowPlaying)
   const [isLoading, setIsLoading] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -67,6 +23,8 @@ function Player() {
     setIsLoading(true)
     playerEl.current.src = nowPlaying.audio
   }, [nowPlaying])
+
+  if (!nowPlaying) return null
 
   const handleCanPlay = () => {
     setIsLoading(false)
@@ -93,20 +51,10 @@ function Player() {
     setCurrentTime(playerEl.current.currentTime)
   }, 1000)
 
-  if (!nowPlaying) return null
-
-  const loader = isLoading ? <Loader className="spin" /> : null
-  const playPause = !isLoading ? (
-    <PlaybackButton
-      onClick={handlePlayPauseClick}
-      state={isPlaying ? 'pause' : 'play'}
-    />
-  ) : null
-
   const totalTime = nowPlaying.audio_length_sec
 
   return (
-    <StyledDiv>
+    <div className={className}>
       <Slider
         className="slider"
         min={0}
@@ -122,22 +70,74 @@ function Player() {
         className="player-left"
       />
 
-      {loader}
-      {playPause}
+      {isLoading ? (
+        <Loader className="spin" />
+      ) : (
+        <PlaybackButton
+          onClick={handlePlayPauseClick}
+          state={isPlaying ? 'pause' : 'play'}
+        />
+      )}
 
-      <div>{nowPlaying.title}</div>
+      <PlayerEpisodeTitle>{nowPlaying.title}</PlayerEpisodeTitle>
 
-      <small className="monospace">
+      <PlayerPodcastTitle>{nowPlaying.podcast.title}</PlayerPodcastTitle>
+
+      <PlayerProgressIndicator className="player-right">
         {getFormattedTime(currentTime)}/{getFormattedTime(totalTime)}
-      </small>
+      </PlayerProgressIndicator>
 
       <audio
         ref={playerEl}
         onCanPlay={handleCanPlay}
         onTimeUpdate={handleTimeUpdate}
       ></audio>
-    </StyledDiv>
+    </div>
   )
 }
 
-export default Player
+export default styled(Player)`
+  height: 100px;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  align-items: center;
+  z-index: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .rc-slider-track {
+    background-color: #9801f0;
+  }
+
+  .slider {
+    position: absolute;
+    top: -9px;
+    z-index: 1;
+  }
+
+  .player-left {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .player-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  @media only screen and (min-width: 800px) {
+    bottom: 0;
+
+    .player-left {
+      display: block;
+    }
+  }
+`
